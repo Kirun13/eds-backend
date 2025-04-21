@@ -1,12 +1,12 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/eds
-    username: eds
-    password: 12345
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate 
     properties:
       hibernate:
         jdbc:
@@ -17,7 +17,10 @@ spring:
 application:
   security:
     jwt:
-      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
-      expiration: 3600000 # an hour
+      secret-key: ${JWT_SECRET}
+      expiration: 3600000 # 1 hours
       refresh-token:
         expiration: 604800000 # 7 days
+
+server:
+  port: 8080
